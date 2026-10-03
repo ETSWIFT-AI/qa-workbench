@@ -1,0 +1,134 @@
+{
+  "base_url": "http://127.0.0.1:8770",
+  "browsers": [
+    "chromium"
+  ],
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800
+    },
+    "mobile-size": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  "datasets": {
+    "products": "products.csv"
+  },
+  "blocks": {
+    "verify_one": [
+      {
+        "action": "request",
+        "url": "/api/orders?run_id=${run_id}",
+        "expect_status": 200,
+        "expect_json": [
+          {
+            "path": "orders",
+            "operator": "count",
+            "expected": 1
+          },
+          {
+            "path": "orders.0.item",
+            "expected": "${item}"
+          }
+        ]
+      }
+    ]
+  },
+  "tests": [
+    {
+      "name": "Order persists exactly once",
+      "dataset": "products",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/"
+        },
+        {
+          "action": "fill",
+          "selector": "#run",
+          "value": "${run_id}"
+        },
+        {
+          "action": "fill",
+          "selector": "#item",
+          "value": "${item}"
+        },
+        {
+          "action": "click",
+          "selector": "#place"
+        },
+        {
+          "action": "expect_text",
+          "selector": "#status",
+          "value": "Confirmed"
+        },
+        {
+          "use": "verify_one"
+        },
+        {
+          "action": "parallel_requests",
+          "count": 3,
+          "method": "POST",
+          "url": "/api/orders",
+          "json": {
+            "run_id": "${run_id}",
+            "item": "${item}"
+          },
+          "expect_status": 201
+        },
+        {
+          "action": "reload"
+        },
+        {
+          "use": "verify_one"
+        }
+      ],
+      "cleanup": [
+        {
+          "action": "request",
+          "method": "DELETE",
+          "url": "/api/orders?run_id=${run_id}",
+          "expect_status": 200
+        },
+        {
+          "action": "request",
+          "url": "/api/orders?run_id=${run_id}",
+          "expect_status": 200,
+          "expect_json": [
+            {
+              "path": "orders",
+              "operator": "count",
+              "expected": 0
+            }
+          ]
+        }
+      ],
+      "case_id": "ORDER-001"
+    },
+    {
+      "name": "Non-admin access denied",
+      "steps": [
+        {
+          "action": "request",
+          "url": "/api/admin",
+          "expect_status": 403
+        }
+      ]
+    },
+    {
+      "name": "Admin access allowed (fixture only)",
+      "steps": [
+        {
+          "action": "request",
+          "url": "/api/admin",
+          "headers": {
+            "X-Role": "admin"
+          },
+          "expect_status": 200
+        }
+      ]
+    }
+  ]
+}

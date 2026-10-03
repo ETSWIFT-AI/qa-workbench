@@ -1,0 +1,1 @@
+{"jobs":[{"name":"python-regression","command":["python","-m","pytest","tests_company","-q","--junitxml=reports/external-python.xml"],"junit":"reports/external-python.xml","timeout_seconds":180}]}

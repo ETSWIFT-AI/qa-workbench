@@ -1,0 +1,16 @@
+QA WORKBENCH — LOCAL BETA
+
+1. Open the website_tester folder containing product_app.py.
+2. First time: double-click setup_product.bat.
+3. Create the administrator username/password in the terminal.
+   Password characters do not appear while typing; this is normal.
+4. Sign in at http://127.0.0.1:8790.
+5. Create a project. Open Setup and check/install browser dependencies.
+6. Select a scan or record a workflow. Review expected outcomes before replay.
+7. Later launches: double-click start_product.bat.
+
+Node.js/npm is needed for axe installation. Keep the terminal open.
+Detailed instructions: PRODUCT_README.md
+Tested behavior and remaining limits: PRODUCT_VALIDATION.md
+
+The app is local-only. It is not a hosted multi-tenant service.

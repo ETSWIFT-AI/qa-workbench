@@ -1,0 +1,36 @@
+name: Company QA regression
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        browser: [chromium, firefox, webkit]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-product.txt
+      - run: python -m playwright install --with-deps ${{ matrix.browser }}
+      - name: Unit and isolated demo integration tests
+        env:
+          QA_COMPANY_BROWSER_TESTS: '1'
+          QA_PRODUCT_BROWSER_TESTS: ${{ matrix.browser == 'chromium' && '1' || '0' }}
+          QA_TEST_BROWSERS: ${{ matrix.browser }}
+        run: python -m pytest tests tests_company tests_product -q --junitxml=reports/ci.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-${{ matrix.os }}-${{ matrix.browser }}
+          path: reports/
+          retention-days: 7

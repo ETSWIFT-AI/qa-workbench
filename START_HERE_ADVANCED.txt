@@ -1,0 +1,11 @@
+NEW: CONFIG-FREE AUTONOMOUS EXPLORATION
+
+1. For a fresh extraction, run setup_windows.bat once.
+2. Run start_autonomous.bat and enter your authorized test URL.
+3. Credentials are requested only if a login form is discovered.
+4. Open the advanced-report.html path printed at completion.
+
+Read AUTONOMOUS_README.md for supported actions and boundaries.
+The original tester.py and gui.py are unchanged.
+The Calista dataset/training scripts remain included for optional screenshot aesthetics.
+The action planner is rule-based, not a trained human-equivalent AI model.

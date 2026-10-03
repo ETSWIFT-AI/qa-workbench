@@ -1,0 +1,1 @@
+{"case_id":"ORDER-001","reviewer":"QA owner","state":"retest","note":"Verify concurrent retries and backend persistence against staging."}

@@ -1,0 +1,17 @@
+{
+  "journeys": [
+    {"name":"About navigation","path":"/","critical":true,"requirement":"NAV-001","steps":[{"action":"click","selector":"a[href='/about']"},{"action":"url","value":"/about"},{"action":"text","selector":"h1","value":"About"}]},
+    {"name":"Save valid registration","path":"/register","critical":true,"requirement":"AGE-001","steps":[{"action":"fill","selector":"#age","value":"25"},{"action":"click","selector":"#submit"},{"action":"text","selector":"#result","value":"Saved"}]}
+  ],
+  "fields": [
+    {"name":"Age range 18 to 120","path":"/register","selector":"#age","requirement":"AGE-001","cases":[
+      {"value":"","accepted":false},{"value":"abc","accepted":false},{"value":"-1","accepted":false},
+      {"value":"17","accepted":false},{"value":"18","accepted":true},{"value":"18.5","accepted":false},
+      {"value":"120","accepted":true},{"value":"121","accepted":false},{"value":"999999999999999999","accepted":false}
+    ]}
+  ],
+  "api_tests": [
+    {"name":"Anonymous profile must be denied","path":"/api/profile","expected_status":401,"authorization_test":true,"role":"anonymous","requirement":"AUTH-001"},
+    {"name":"About endpoint status","path":"/about","expected_status":200}
+  ]
+}

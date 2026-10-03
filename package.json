@@ -1,0 +1,9 @@
+{
+  "name": "website-qa-accessibility-assets",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Optional locally installed axe-core browser audit engine",
+  "dependencies": {
+    "axe-core": "4.10.3"
+  }
+}

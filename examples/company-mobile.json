@@ -1,0 +1,1 @@
+{"device_kind":"Set to real or emulator based on your provider session","capabilities":{"platformName":"Android","appium:automationName":"UiAutomator2","appium:deviceName":"YOUR_TEST_DEVICE","appium:app":"/absolute/path/to/your-test-app.apk"},"tests":[{"name":"App heading","steps":[{"action":"visible","by":"accessibility id","selector":"YOUR_HEADING_ID"}]}]}

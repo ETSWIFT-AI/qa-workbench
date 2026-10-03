@@ -1,0 +1,1 @@
+{"id":"ORDER-001","name":"Order persists exactly once","owner":"QA owner","priority":"critical","requirement":"One persisted order per idempotency key, including concurrent retries"}

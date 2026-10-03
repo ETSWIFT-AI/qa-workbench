@@ -1,0 +1,1 @@
+Historical experimental source, preserved separately from QA Workbench. Generated reports and third-party training data are excluded. Calista data source: https://github.com/calista-ai/website-aesthetics-datasets . Training commands require downloading and preparing data again; this archive is not the cleaned product release.

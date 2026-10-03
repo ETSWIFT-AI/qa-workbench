@@ -1,0 +1,4 @@
+-r requirements.txt
+openpyxl>=3.1,<4
+pip-audit>=2.7,<3
+pytest>=8,<9
