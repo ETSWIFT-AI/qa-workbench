@@ -4,7 +4,7 @@ A local web dashboard for scanning websites, recording browser workflows, and tu
 
 Most test tools hand you one score and call it a day. QA Workbench reports two numbers, tested quality and coverage, so a site with a single passing check is never mistaken for a site that is ready to ship.
 
-Show Image
+
 
 Status: local beta. Runs on your own machine (loopback only). It is not a hosted SaaS and does not guarantee exhaustive testing. See Limitations.
 
